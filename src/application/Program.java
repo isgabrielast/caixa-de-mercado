@@ -20,8 +20,8 @@ public class Program {
 
         Caixa caixa = new Caixa(LocalDateTime.now(), TipoPagamento.valueOf(tipoPagamento));
 
-        System.out.print("Quantos produtos você irá comprar? ");
-        int numeroProdutos = input.nextInt();
+        System.out.print("Quantos produtos você irá comprar ao total? ");
+        int n = input.nextInt();
         input.nextLine();
 
         System.out.println();
@@ -29,19 +29,23 @@ public class Program {
         //Instanciei o objeto aqui para poder mostrar o valor da compra no final do código.
         Compra compra = null;
 
-        for (int i = 0; i < numeroProdutos; i++) {
+        int sum = 0;
+        do {
             System.out.print("Digite o nome do produto: ");
             String nomeProduto = input.nextLine();
 
             System.out.print("Digite o preço do produto: ");
             double precoProduto = input.nextDouble();
+
+            System.out.print("Digite a quantidade: ");
+            int numeroProdutos = input.nextInt();
             input.nextLine();
 
-            System.out.println();
+            sum += numeroProdutos;
 
             compra = new Compra(new Produto(nomeProduto, precoProduto), numeroProdutos);
             caixa.addCompra(compra);
-        }
+        } while (sum < n);
 
         System.out.println();
 
@@ -51,7 +55,7 @@ public class Program {
 
         System.out.print("Produtos comprados: ");
         for (Compra comp : caixa.getCompras()) {
-            System.out.print(comp.getProduto().getNome() + " ");
+            System.out.printf("%d.x %s ",comp.getQuantidadeItem(), comp.getProduto().getNome());
         }
 
         System.out.println();

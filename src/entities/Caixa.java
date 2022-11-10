@@ -48,7 +48,7 @@ public class Caixa {
     public Double total(Compra compra){
         double sum = 0;
         for (Compra comp : compras) {
-            sum += compra.getProduto().getPreco();
+            sum += comp.getProduto().getPreco() * comp.getQuantidadeItem();
         }
         return sum;
     }
